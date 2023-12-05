@@ -1,0 +1,21 @@
+<form style="height: 200px; width: 400px; margin: 10%;" >
+<div *ngFor="let item of data" >
+    {{ item.name }}
+    <button class="btn btn-warning float-end" style="margin-right: 20px;" (click)="deleteItem(item.id)">Delete</button>
+    <button class="btn btn-primary float-end" style=" margin-right: 20px;" (click)="view(item)">
+        {{ item.showDetails ?'View' : 'view'}}
+      </button>
+      <div *ngIf="item.showDetails">{{ item.city }}</div>
+      <button *ngIf="item.showDetails" (click)="cancelview(item)">hide</button>
+    <ng-container *ngIf="!item.editing">
+      <button class="btn btn-success float-end"style="margin-right: 40px;" (click)="toggleEdit(item)">Edit</button><br><br>
+    </ng-container>
+    <ng-container *ngIf="item.editing">
+        <br>
+      <input [(ngModel)]="item.name" name="name"/>
+      <input [(ngModel)]="item.city" name="city"/>
+      <button (click)=" saveEdit(item)">Save</button>
+      <button (click)="cancelEdit(item)">Cancel</button>
+    </ng-container>
+  </div>
+</form>
